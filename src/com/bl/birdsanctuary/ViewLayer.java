@@ -1,6 +1,6 @@
 package com.bl.birdsanctuary;
 
-public class ViewLayer {
+public class ViewLayer{
 	public void print() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
 		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
@@ -11,7 +11,11 @@ public class ViewLayer {
 	public void printFlyable() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
 		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			item.fly();
+			if(item instanceof Flyable) {
+				//((Flyable) item).fly();
+				Flyable flyable = (Flyable) item;
+				flyable.fly();
+			}
 		}
 	}
 	
@@ -25,7 +29,10 @@ public class ViewLayer {
 	public void printSwimmable() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
 		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			item.swim();
+			if(item instanceof Swimmable) {
+				Swimmable swimmable = (Swimmable) item;
+				swimmable.swim();
+			}
 		}
 	}
 }

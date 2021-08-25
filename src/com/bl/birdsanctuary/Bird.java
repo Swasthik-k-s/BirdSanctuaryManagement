@@ -33,10 +33,6 @@ public abstract class Bird{
 		return Objects.equals(color, other.color) && Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 	
-	abstract public void fly();
-	
 	abstract public void eat();
-	
-	abstract public void swim(); 
 	
 }
