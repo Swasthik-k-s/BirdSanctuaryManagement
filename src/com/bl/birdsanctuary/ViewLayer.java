@@ -3,36 +3,33 @@ package com.bl.birdsanctuary;
 public class ViewLayer{
 	public void print() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
-		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			System.out.println(item);
+		for(Bird bird: birdSanctuaryRepository.getAllBirds()) {
+			System.out.println(bird);
 		}
 	}
 	
 	public void printFlyable() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
-		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			if(item instanceof Flyable) {
-				//((Flyable) item).fly();
-				Flyable flyable = (Flyable) item;
-				flyable.fly();
-			}
+		for(Bird bird: birdSanctuaryRepository.getAllBirds()) {
+			if(bird.canFly)
+				bird.fly();
 		}
 	}
 	
 	public void printEatable() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
-		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			item.eat();
+		for(Bird bird: birdSanctuaryRepository.getAllBirds()) {
+			bird.eat();
 		}
 	}
 	
 	public void printSwimmable() {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
-		for(Bird item: birdSanctuaryRepository.getAllBirds()) {
-			if(item instanceof Swimmable) {
-				Swimmable swimmable = (Swimmable) item;
-				swimmable.swim();
+		for(Bird bird: birdSanctuaryRepository.getAllBirds()) {
+			if(bird.canSwim) {
+				bird.swim();
 			}
+			
 		}
 	}
 }
