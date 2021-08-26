@@ -2,7 +2,7 @@ package com.bl.birdsanctuary;
 
 import java.util.Objects;
 
-public abstract class Bird{
+public class Bird{
 	enum Color {
 		RED, BLACK_WHITE, GREY, BLACK, WHITE, GREEN
 	}
@@ -10,6 +10,8 @@ public abstract class Bird{
 	String id;
 	Color color;
 	String name;
+	Boolean canFly;
+	Boolean canSwim;
 	
 	@Override
 	public String toString() {
@@ -30,9 +32,18 @@ public abstract class Bird{
 		if (getClass() != obj.getClass())
 			return false;
 		Bird other = (Bird) obj;
-		return Objects.equals(color, other.color) && Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		return Objects.equals(id, other.id);
 	}
 	
-	abstract public void eat();
+	public void eat() {
+		System.out.println(name + " can Eat.");
+	}
 	
+	public void fly() {
+		System.out.println(name + " can Fly.");
+	}
+	
+	public void swim() {
+		System.out.println(name + " can Swim.");
+	}
 }

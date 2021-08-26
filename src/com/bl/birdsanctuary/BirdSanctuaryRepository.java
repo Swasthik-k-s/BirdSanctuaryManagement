@@ -6,7 +6,7 @@ public class BirdSanctuaryRepository {
 	
 	private static BirdSanctuaryRepository instance;
 	
-	private Set<Bird> birdList = new HashSet();
+	private Set<Bird> birdList = new HashSet<>();
 	
 	private BirdSanctuaryRepository() {
 		

@@ -7,22 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.showUserMenu();
-
-		/*
-		 * Parrot parrot = new Parrot(); parrot.id = "pa001"; Ostrich ostrich = new
-		 * Ostrich(); ostrich.id = "os001"; Duck duck = new Duck(); duck.id = "du001";
-		 * Crow crow = new Crow(); crow.id = "cr001";
-		 * 
-		 * BirdSanctuaryRepository bird = new BirdSanctuaryRepository();
-		 * 
-		 * bird.add(parrot); bird.add(ostrich); bird.add(duck); bird.add(crow);
-		 * 
-		 * bird.print();
-		 * 
-		 * bird.remove(crow);
-		 * 
-		 * System.out.println("After Delete"); bird.print();
-		 */
 		System.out.println("Good Bye");
 	}
 
@@ -34,7 +18,7 @@ public class Main {
 		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
 
 		while (choice != EXIT_VALUE) {
-			System.out.println("Enter your option\n");
+			System.out.println("\nEnter your option");
 			System.out.println(
 					"1)Add a Bird\n2)Remove a Bird\n3)Print the Bird\n4)Print Swimmable\n5)Print Flyable\n6)Print Eatable\n"
 							+ "7)Edit Bird\n" + EXIT_VALUE + ")Exit\n");
@@ -44,29 +28,11 @@ public class Main {
 
 			switch (choice) {
 			case 1:
-				Parrot parrot = new Parrot();
-				parrot.id = "pa001";
-				Ostrich ostrich = new Ostrich();
-				ostrich.id = "os001";
-				Duck duck = new Duck();
-				duck.id = "du001";
-				Crow crow = new Crow();
-				crow.id = "cr001";
-				Crow crow2 = new Crow();
-				crow.id = "cr002";
-				Crow crow3 = new Crow();
-				crow.id = "cr002";
-
-				birdSanctuaryRepository.add(parrot);
-				birdSanctuaryRepository.add(ostrich);
-				birdSanctuaryRepository.add(duck);
-				birdSanctuaryRepository.add(crow);
-				birdSanctuaryRepository.add(crow2);
-				birdSanctuaryRepository.add(crow3);
+				addTemporaryBirds();
+				addBird();
 				break;
 			case 2:
 				System.out.println("Enter the bird name to remove\n");
-				// String birdname = scanner.nextLine();
 				String birdname = scanner.next();
 				Bird removeBird = birdSanctuaryRepository.getBird(birdname);
 				birdSanctuaryRepository.remove(removeBird);
@@ -91,6 +57,77 @@ public class Main {
 			}
 
 		}
+	}
+
+	private void addTemporaryBirds() {
+		Bird duck = new Bird();
+		duck.id = "du001";
+		duck.name = "Duck";
+		duck.color = Bird.Color.GREY;
+		duck.canFly = false;
+		duck.canSwim = true;
+		BirdSanctuaryRepository birdSanctuaryRepository = BirdSanctuaryRepository.getInstance();
+		birdSanctuaryRepository.add(duck);
+		
+		Bird ostrich = new Bird();
+		ostrich.id = "os001";
+		ostrich.name = "Ostrich";
+		ostrich.color = Bird.Color.WHITE;
+		ostrich.canFly = false;
+		ostrich.canSwim = false;
+		birdSanctuaryRepository.add(ostrich);
+		
+		Bird parrot = new Bird();
+		parrot.id = "pa001";
+		parrot.name = "Parrot";
+		parrot.color = Bird.Color.GREEN;
+		parrot.canFly = true;
+		parrot.canSwim = false;
+		birdSanctuaryRepository.add(parrot);
+		
+		Bird crow = new Bird();
+		crow.id = "cr001";
+		crow.name = "Crow";
+		crow.color = Bird.Color.BLACK;
+		crow.canFly = true;
+		crow.canSwim = false;
+		birdSanctuaryRepository.add(crow);
+	}
+
+	private void addBird() {
+		Scanner scanner = new Scanner(System.in);
+		Bird addBird = new Bird();
+		System.out.println("Enter the ID");
+		String id = scanner.nextLine();
+		addBird.id = id;
+		System.out.println("Enter the Name");
+		String name = scanner.nextLine();
+		addBird.name = name;
+		System.out.println("Enter the Color");
+		int count = 1;
+
+		for (Bird.Color color : EnumSet.allOf(Bird.Color.class)) {
+			System.out.println(count + " " + color);
+			count++;
+		}
+		int choice2 = scanner.nextInt();
+
+		int count1 = 1;
+
+		for (Bird.Color color : EnumSet.allOf(Bird.Color.class)) {
+			if (choice2 == count1) {
+				addBird.color = color;
+				break;
+			}
+			count1++;
+		}
+		System.out.println("Can the Bird Fly?");
+		Boolean canFly = scanner.nextBoolean();
+		addBird.canFly = canFly;
+		System.out.println("Can the Bird Swim?");
+		Boolean canSwim = scanner.nextBoolean();
+		addBird.canSwim = canSwim;
+		BirdSanctuaryRepository.getInstance().add(addBird);
 	}
 
 	private void editBird() {
